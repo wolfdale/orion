@@ -7,4 +7,4 @@ email VARCHAR(50) NOT NULL,
 gender VARCHAR(50) NOT NULL,
 credit_card VARCHAR(50) NOT NULL,
 credit_card_type VARCHAR(50) NOT NULL
-); 
+);

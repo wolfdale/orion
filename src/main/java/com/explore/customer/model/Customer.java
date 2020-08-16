@@ -1,16 +1,10 @@
 package com.explore.customer.model;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.springframework.stereotype.Component;
-
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Column;
-import java.util.UUID;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Component
 @Entity
 @Table(name = "customer")
 public class Customer {

@@ -1,22 +1,16 @@
-package com.explore.customer.adapter;
+package com.explore.customer.translator;
 
 import com.explore.customer.dto.CustomerDTO;
 import com.explore.customer.model.Customer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
 @Component
-public class CustomerAdapter {
-    @Autowired
-    CustomerDTO dto;
-
-    @Autowired
-    Customer consumer;
-
+public class CustomerTranslator {
     public CustomerDTO translate(Customer customer) {
         if (customer != null) {
+            CustomerDTO dto = new CustomerDTO();
             dto.setUuid(customer.getUuid());
             dto.setFirstName(customer.getFirstName());
             dto.setLastName(customer.getLastName());
@@ -31,17 +25,18 @@ public class CustomerAdapter {
     }
 
     public Customer translate(CustomerDTO dto) {
-        consumer.setUuid(UUID.randomUUID().toString());
-        consumer.setFirstName(dto.getFirstName());
-        consumer.setLastName(dto.getLastName());
-        consumer.setGender(dto.getGender());
-        consumer.setEmail(dto.getEmail());
-        consumer.setCreditCard(dto.getCreditCard());
-        consumer.setCreditCardType(dto.getCreditCardType());
-        return consumer;
+        Customer customer = new Customer();
+        customer.setUuid(UUID.randomUUID().toString());
+        customer.setFirstName(dto.getFirstName());
+        customer.setLastName(dto.getLastName());
+        customer.setGender(dto.getGender());
+        customer.setEmail(dto.getEmail());
+        customer.setCreditCard(dto.getCreditCard());
+        customer.setCreditCardType(dto.getCreditCardType());
+        return customer;
     }
 
-    public Customer adaptToEntity(CustomerDTO customerDTO, Customer customer) {
+    public Customer populate(CustomerDTO customerDTO, Customer customer) {
         if (customerDTO.getEmail() != null) {
             customer.setEmail(customerDTO.getEmail());
         }
@@ -69,4 +64,6 @@ public class CustomerAdapter {
         customer.setUuid(customer.getUuid());
         return customer;
     }
+
+
 }
