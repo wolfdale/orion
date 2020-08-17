@@ -1,8 +1,5 @@
 package com.explore.customer.dto;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class CustomerDTO {
     private String uuid;
     private String firstName;

@@ -1,9 +1,9 @@
 package com.explore.customer.core;
 
-import com.explore.customer.adapter.CustomerAdapter;
 import com.explore.customer.dao.CustomerRepository;
 import com.explore.customer.dto.CustomerDTO;
 import com.explore.customer.model.Customer;
+import com.explore.customer.translator.CustomerTranslator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,18 +13,19 @@ import java.util.Optional;
 public class CustomerServiceImpl {
     @Autowired
     public CustomerRepository customerDAO;
+
     @Autowired
-    public CustomerAdapter customerAdapter;
+    public CustomerTranslator customerTranslator;
 
     public CustomerDTO persistCustomer(CustomerDTO customerDTO) {
-        Customer customer = customerAdapter.translate(customerDTO);
-        return customerAdapter.translate(customerDAO.save(customer));
+        Customer customer = customerTranslator.translate(customerDTO);
+        return customerTranslator.translate(customerDAO.save(customer));
     }
 
     public CustomerDTO getCustomer(String uuid) {
         Optional<Customer> customer = customerDAO.findById(uuid);
         if (customer.isPresent()) {
-            return customerAdapter.translate(customer.get());
+            return customerTranslator.translate(customer.get());
         } else {
             return null;
         }
@@ -44,8 +45,8 @@ public class CustomerServiceImpl {
         Optional<Customer> container = findCustomerById(uuid);
         if (container.isPresent()) {
             Customer customer = container.get();
-            customer = customerAdapter.adaptToEntity(customerDTO, customer);
-            return customerAdapter.translate(customerDAO.save(customer));
+            customer = customerTranslator.populate(customerDTO, customer);
+            return customerTranslator.translate(customerDAO.save(customer));
         } else {
             return null;
         }
