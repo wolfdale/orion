@@ -14,9 +14,9 @@ public class CustomerTranslator {
             dto.setUuid(customer.getUuid());
             dto.setFirstName(customer.getFirstName());
             dto.setLastName(customer.getLastName());
-            dto.setCreditCard(customer.getFirstName());
+            dto.setCreditCard(customer.getCreditCard());
             dto.setCreditCardType(customer.getCreditCardType());
-            dto.setEmail(customer.getCreditCardType());
+            dto.setEmail(customer.getEmail());
             dto.setGender(customer.getGender());
             return dto;
         } else {
@@ -64,6 +64,4 @@ public class CustomerTranslator {
         customer.setUuid(customer.getUuid());
         return customer;
     }
-
-
 }
